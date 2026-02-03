@@ -415,8 +415,6 @@ function preloadImages(urls) {
 
 // ===== Initialize =====
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('✨ Site da Vic Psi carregado com sucesso!');
-
     // Add loaded class to body for CSS animations
     setTimeout(() => {
         document.body.classList.add('loaded');
@@ -456,8 +454,3 @@ if (prefersReducedMotion.matches) {
     document.documentElement.style.setProperty('--transition', 'none');
     document.documentElement.style.setProperty('--transition-slow', 'none');
 }
-
-// ===== Console Welcome Message =====
-console.log('%c💜 Vic Psi - Psicóloga Clínica', 'font-size: 24px; font-weight: bold; color: #9B6B9E;');
-console.log('%cCRP 06/181680 | Taubaté/SP e Online', 'font-size: 14px; color: #6B7280;');
-console.log('%c✨ Desenvolvido com carinho', 'font-size: 12px; color: #C9A0CC;');
