@@ -960,7 +960,7 @@ section {
 /* ===== Serviços Section ===== */
 .servicos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
@@ -1342,8 +1342,15 @@ section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+    /* centraliza o bloco de cards abaixo do título */
+    max-width: 820px;
+    margin: 0 auto;
+    /* ocupa toda a largura da grid (útil quando o bloco de redes foi removido) */
+    grid-column: 1 / -1;
 }
 
+/* Make links with .contato-item look like the existing cards */
+a.contato-item,
 .contato-item {
     display: flex;
     gap: 20px;
@@ -1352,8 +1359,11 @@ section {
     background: var(--gray-light);
     border-radius: 15px;
     transition: var(--transition);
+    color: inherit;
 }
 
+/* preserve hover behaviour for link cards */
+a.contato-item:hover,
 .contato-item:hover {
     background: var(--light);
     box-shadow: var(--shadow-md);
@@ -1389,49 +1399,17 @@ section {
     font-size: 0.95rem;
 }
 
-.contato-social {
-    background: var(--gradient-1);
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    color: var(--light);
-}
-
-.contato-social h3 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.social-link {
-    width: 55px;
-    height: 55px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.social-link i {
-    font-size: 1.4rem;
-    color: var(--light);
-}
-
-.social-link:hover {
-    background: var(--light);
-    transform: translateY(-5px);
-}
-
-.social-link:hover i {
+/* CTA inside contato cards */
+.contato-cta {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--primary);
 }
+
+/* Ensure the social links block removal doesn't break layout */
+.contato-social { display: none; }
 
 /* ===== Footer ===== */
 .footer {
