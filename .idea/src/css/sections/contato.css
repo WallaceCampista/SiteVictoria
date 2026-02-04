@@ -1,0 +1,91 @@
+/* ===== Contato Section ===== */
+.contato-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.contato-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 820px;
+    margin: 0 auto;
+    grid-column: 1 / -1;
+}
+
+/* ===== Contato Items ===== */
+a.contato-item,
+.contato-item {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+    padding: 25px;
+    background: var(--gray-light);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    color: inherit;
+}
+
+a.contato-item:hover,
+.contato-item:hover {
+    background: var(--light);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+/* ===== Contato Icon ===== */
+.contato-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contato-icon i {
+    color: var(--light);
+    font-size: 1.2rem;
+}
+
+/* ===== Contato Text ===== */
+.contato-text h4 {
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-primary);
+    font-weight: 600;
+}
+
+.contato-text p {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+.contato-cta {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Hide social links block (if present) */
+.contato-social {
+    display: none;
+}
+
+/* ===== Contato Responsive ===== */
+@media (max-width: 768px) {
+    .contato-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contato-info {
+        grid-template-columns: 1fr;
+    }
+}

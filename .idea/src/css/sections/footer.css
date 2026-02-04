@@ -1,0 +1,46 @@
+/* ===== Footer ===== */
+.footer {
+    background: var(--dark);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+}
+
+.footer-content {
+    color: var(--light);
+}
+
+.footer-logo {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.footer-logo .logo-text {
+    color: var(--light);
+}
+
+.footer-logo .logo-psi {
+    color: var(--primary-light);
+}
+
+.footer-text {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: var(--spacing-xs);
+}
+
+.footer-crp {
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+.footer-divider {
+    width: 100px;
+    height: 2px;
+    background: var(--gradient-1);
+    margin: 30px auto;
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    opacity: 0.5;
+}

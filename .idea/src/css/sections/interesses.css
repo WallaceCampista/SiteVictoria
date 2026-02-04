@@ -1,0 +1,116 @@
+/* ===== Interesses Section ===== */
+.interesses {
+    background: var(--gray-light);
+}
+
+.interesses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.interesse-card {
+    background: var(--light);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.interesse-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.interesse-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.interesse-card:hover::before {
+    opacity: 0.03;
+}
+
+/* ===== Interesse Icon ===== */
+.interesse-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    transition: var(--transition);
+}
+
+.interesse-icon i {
+    font-size: 1.8rem;
+    color: var(--primary);
+}
+
+.interesse-icon.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.interesse-icon.instagram i {
+    color: var(--light);
+}
+
+.interesse-card:hover .interesse-icon {
+    transform: scale(1.1);
+}
+
+/* ===== Interesse Content ===== */
+.interesse-card h3 {
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.interesse-arrow {
+    width: 50px;
+    height: 50px;
+    background: var(--gray-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.interesse-arrow i {
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.interesse-card:hover .interesse-arrow {
+    background: var(--primary);
+}
+
+.interesse-card:hover .interesse-arrow i {
+    color: var(--light);
+    transform: translateX(3px);
+}
+
+/* ===== Interesses Responsive ===== */
+@media (max-width: 768px) {
+    .interesses-grid {
+        grid-template-columns: 1fr;
+    }
+}
