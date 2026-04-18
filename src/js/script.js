@@ -31,8 +31,6 @@
     // ===== Elements Cache =====
     const elements = {
         loader: DOM.get('.loader'),
-        cursor: DOM.get('.cursor'),
-        cursorFollower: DOM.get('.cursor-follower'),
         header: DOM.get('.header'),
         navToggle: DOM.get('#nav-toggle'),
         navMenu: DOM.get('#nav-menu'),
@@ -40,8 +38,9 @@
         backToTop: DOM.get('#backToTop'),
         faqItems: DOM.getAll('.faq-item'),
         animateOnScroll: DOM.getAll('.animate-on-scroll'),
-        heroAnimations: DOM.getAll('.animate-text, .animate-image'),
+        heroAnimations: DOM.getAll('.animate-text:not(.typing-line), .animate-image'),
         particlesContainer: DOM.get('#particles'),
+        heroNameLines: DOM.getAll('.typing-line'),
         spheres: DOM.getAll('.gradient-sphere'),
         serviceCards: DOM.getAll('.servico-card'),
         sections: DOM.getAll('section[id]')
@@ -63,39 +62,65 @@
             elements.heroAnimations.forEach((el, index) => {
                 setTimeout(() => DOM.addClass(el, 'animate'), index * 150);
             });
+
+            // Inicia o efeito de digitação quando os elementos do hero já começaram a aparecer.
+            setTimeout(() => TypingHeroName.init(), 400);
         }
     };
 
-    // ===== Custom Cursor Module =====
-    const CustomCursor = {
+    // ===== Hero Typing Module =====
+    const TypingHeroName = {
         init() {
-            if (window.innerWidth <= 768 || !elements.cursor || !elements.cursorFollower) return;
+            if (!elements.heroNameLines.length) return;
 
-            document.addEventListener('mousemove', (e) => {
-                elements.cursor.style.left = `${e.clientX}px`;
-                elements.cursor.style.top = `${e.clientY}px`;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                elements.heroNameLines.forEach(line => {
+                    line.textContent = line.dataset.text || line.textContent;
+                    DOM.removeClass(line, 'is-typing');
+                });
+                return;
+            }
 
-                setTimeout(() => {
-                    elements.cursorFollower.style.left = `${e.clientX}px`;
-                    elements.cursorFollower.style.top = `${e.clientY}px`;
-                }, 100);
-            });
-
-            this.setupHoverEffects();
+            this.typeLinesSequentially(Array.from(elements.heroNameLines));
         },
-        setupHoverEffects() {
-            const hoverElements = DOM.getAll('a, button, .servico-card, .faq-question, .interesse-card');
 
-            hoverElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    DOM.addClass(elements.cursor, 'hover');
-                    DOM.addClass(elements.cursorFollower, 'hover');
+        typeLinesSequentially(lines) {
+            let lineIndex = 0;
+
+            const typeNextLine = () => {
+                if (lineIndex >= lines.length) return;
+
+                const line = lines[lineIndex];
+                const fullText = line.dataset.text || line.textContent.trim();
+                let charIndex = 0;
+
+                // Remove delays herdados do animate-text para a digitação ficar visível desde a 1a letra.
+                line.classList.forEach(className => {
+                    if (className.indexOf('delay-') === 0) {
+                        line.classList.remove(className);
+                    }
                 });
-                el.addEventListener('mouseleave', () => {
-                    DOM.removeClass(elements.cursor, 'hover');
-                    DOM.removeClass(elements.cursorFollower, 'hover');
-                });
-            });
+
+                line.textContent = '';
+                DOM.addClass(line, 'animate', 'is-typing');
+
+                const typeNextChar = () => {
+                    if (charIndex < fullText.length) {
+                        line.textContent += fullText.charAt(charIndex);
+                        charIndex += 1;
+                        setTimeout(typeNextChar, 95);
+                        return;
+                    }
+
+                    DOM.removeClass(line, 'is-typing');
+                    lineIndex += 1;
+                    setTimeout(typeNextLine, 150);
+                };
+
+                setTimeout(typeNextChar, 120);
+            };
+
+            typeNextLine();
         }
     };
 
@@ -539,7 +564,6 @@
     function init() {
         // Initialize on DOM ready
         Accessibility.init();
-        CustomCursor.init();
         Navigation.init();
         Particles.init();
         ScrollAnimations.init();
@@ -548,6 +572,11 @@
         LazyLoad.init();
         GalleryCarousel.init();
         EasterEgg.init();
+
+        // Fallback para cenários sem loader ativo.
+        if (!elements.loader) {
+            TypingHeroName.init();
+        }
 
         setTimeout(() => DOM.addClass(document.body, 'loaded'), 100);
 

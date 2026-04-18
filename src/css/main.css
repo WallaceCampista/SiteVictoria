@@ -13,7 +13,6 @@
 @import url('./animations.css');
 
 /* 4. Components */
-@import url('./components/cursor.css');
 @import url('./components/loader.css');
 @import url('./components/header.css');
 @import url('./components/buttons.css');
